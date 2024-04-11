@@ -52,7 +52,6 @@ def process(request):
 
 def check_ad(login):
     
-    # Replace 'your_domain_controller' with the hostname or IP address of your Active Directory server
     server = Server('', get_info=ALL)
     conn = Connection(server, user="", password="", auto_bind=True)
 
