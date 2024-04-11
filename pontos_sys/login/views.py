@@ -54,7 +54,7 @@ def check_ad(login):
     
     # Replace 'your_domain_controller' with the hostname or IP address of your Active Directory server
     server = Server('DC901.sysmexamerica.com', get_info=ALL)
-    conn = Connection(server, user="Admin-moraesg", password="S#cr#tantius1340", auto_bind=True)
+    conn = Connection(server, user="", password="", auto_bind=True)
 
     # Replace 'your_base_dn' with the base Distinguished Name (DN) where you want to start the search
     base_dn = 'ou=brazil,ou=latam,ou=user,ou=company,dc=sysmexamerica,dc=com'
