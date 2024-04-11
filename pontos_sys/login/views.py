@@ -63,7 +63,6 @@ def check_ad(login):
 
     
 
-    # Replace 'your_attributes' with a list of attributes you want to retrieve (e.g., ['cn', 'mail'])
     attributes = ['mail', 'cn', 'department']
 
     # Perform the LDAP search
@@ -212,7 +211,7 @@ def register(request):
                 _, user.cc = check_ad(email)
                 if user.cc == "2312100050":
                     user.is_rh = True
-                user.save()  # Save the user instance to the database
+                user.save()  
                 return redirect('index')  # Redirect to the login page after successful registration
             elif mail_exists == False:
                 show_alert_mail_exists = True
@@ -306,13 +305,11 @@ def requisicoes(request):
 
             writer = csv.writer(response, delimiter=';')  # Specify the delimiter as ';'
 
-            # Write header row
             writer.writerow(['ID', 'Date', 'requisitante', 'status'])
 
             # Fetch data from the Transaction model
            
 
-            # Write data rows
             for request in requests:
                 status = ""
                 if request.status == False:
