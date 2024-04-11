@@ -1,0 +1,370 @@
+.custom-table {
+  border-radius: 15px;
+}
+.custom-table th, .custom-table td {
+  border: 1px solid #dee2e6;
+}
+.custom-table th {
+  background-color: #007bff;
+  color: white;
+}
+.custom-table tbody tr:nth-of-type(odd) {
+  background-color: #f8f9fa;
+}
+.custom-table tbody tr:hover {
+  background-color: #cce5ff;
+}
+
+.cardd {
+  width: 60%;
+  background-color: #fff;
+  border: none;
+  border-radius: 12px;
+  margin: 0 auto;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+label.radio {
+  cursor: pointer;
+  width: 100%;
+  display: block;
+  margin-bottom: 10px;
+}
+
+label.radio input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+label.radio span {
+  padding: 7px 14px;
+  border: 2px solid #eee;
+  display: inline-block;
+  color: #039be5;
+  border-radius: 10px;
+  width: 100%;
+  height: 48px;
+  line-height: 27px;
+  box-sizing: border-box;
+}
+
+label.radio input:checked+span {
+  border-color: #039BE5;
+  background-color: #81D4FA;
+  color: #fff;
+  border-radius: 9px;
+}
+
+.form-control {
+  margin-top: 10px;
+  height: 48px;
+  border: 2px solid #eee;
+  border-radius: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 15px;
+}
+
+.form-control:focus {
+  outline: none;
+  border: 2px solid #039BE5;
+}
+
+.agree-text {
+  font-size: 12px;
+}
+
+.terms {
+  font-size: 12px;
+  text-decoration: none;
+  color: #039BE5;
+}
+
+.confirm-button {
+  height: 50px;
+  border-radius: 10px;
+  background-color: #039BE5;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  width: 100%;
+  margin-top: 15px;
+}
+
+.confirm-button:hover {
+  background-color: #0573ad;
+}
+
+
+body {
+  background-color: #f8f9fa;
+}
+.input-container {
+  margin-bottom: 15px;
+}
+.input-container label {
+  display: block;
+  margin-bottom: 5px;
+}
+.input-container input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  background-color: #f8f9fa;
+}
+.button {
+  background-color: #6c757d;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.button:hover {
+  background-color: #5a6268;
+}
+  
+  .card-title {
+    font-size: 16px;
+  }
+
+  .card-text {
+    font-size: 12px;
+  }
+
+  .input-container{
+    align-items: left;
+    padding: 10px;
+
+  }
+
+  .my-points {
+    width: 80%;
+    height: 60%;
+    margin: 0 auto;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #f2f2f2;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    max-height: 500px; /* Adjust the max height as needed */
+    overflow-y: auto; /* Add vertical scrollbar when content exceeds container height */
+
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    padding: 48px 0 0;
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+    width: 250px;
+    background-color: #f8f9fa;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .main-content {
+    margin-left: 250px;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    padding: 5px;
+    height: calc(100vh - 15px);
+  }
+
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    justify-content: right;
+    background-color: rgb(0, 102, 153); /* Marine blue */
+    color: white; /* Change text color to white */
+    border-bottom: none;
+  }
+
+  .header .navbar-nav .nav-link {
+    color: white; /* Change text color of nav links to white */
+  }
+
+  .separator {
+    border-top: 4px solid white;
+    margin-top: 20px; /* Adjust margin as needed */
+    margin-bottom: 20px; /* Adjust margin as needed */
+    width: 100%; /* Ensure the line spans the entire width */
+  }
+  
+
+  .content-section {
+    width: 80%;
+    margin: 0 auto;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #c8e6c9;
+    position: relative; /* Add position relative */
+  }
+
+
+  .content-section2 {
+    width: 45%;
+    height: 50%;
+    margin: 0 auto;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #f2f2f2;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    max-height: 300px; /* Adjust the max height as needed */
+    overflow-y: auto; /* Add vertical scrollbar when content exceeds container height */
+  }
+  
+
+  .widget-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    background-color: #c8e6c9;
+    border-radius: 10px;
+    position: relative; /* Add position relative */
+    overflow: hidden; /* Hide overflow to prevent image overflow */
+  }
+  .widget-container2 {
+    display: flex;
+    justify-content: space-between; /* Spread the containers evenly */
+    align-items: flex-start; /* Align items at the start of the container */
+    background-color: #f2f2f2;
+    border-radius: 10px;
+    position: relative;
+    max-height: 100%;
+    text-align: left;
+  }
+  
+  .small-container2 {
+    /* Remove height and width properties */
+    text-align: left;
+    margin: 5px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+    background-color: #f2f2f2;
+    color: black;
+    z-index: 1;
+    padding: 10px;
+    box-sizing: border-box; /* Ensure padding doesn't affect width */
+    flex-basis: calc(50% - 10px); /* Adjust width to occupy half of the container minus margin */
+    flex-grow: 1; /* Allow flex item to grow to fill remaining space */
+  }
+  
+  
+
+  .fade-image {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 300px; /* Adjust width as needed */
+    height: 100%; /* Fill the container height */
+    background: linear-gradient(to left, rgba(255, 255, 255, 0), #c8e6c9), url('bigstock-Happy-Business-People-Working-255899575.jpg') no-repeat;
+    background-size: cover;
+    z-index: 0; /* Ensure it stays behind content */
+  }
+
+  
+
+  .small-container {
+    height: 80px;
+    width: 120px;
+    margin: 5px; /* Fixed margin between containers */
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 100, 0, 0.6);
+    color: white;
+    z-index: 1;
+  }
+
+  .parent-container {
+    display: flex;
+    max-height: 100%;
+    max-width: 100%;    
+    justify-content: space-between; /* Spread the children evenly */
+  }
+  .parent-container1 {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 1%; /* Optional, adjust as needed */
+    padding: 1%;
+  }
+
+  .gray-section {
+    background-color: #f2f2f2; /* Gray color for the gray section */
+  }
+  .small-container h5 {
+    text-align: center;
+    margin-top: 5px;
+    font-size: 12px;
+  }
+
+  .small-container2 h5 {
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 12px;
+  }
+
+  .small-container p {
+    text-align: center;
+    font-size: 14px;
+  }
+
+  .small-container2 p {
+    text-align: left;
+    font-size: 14px;
+    color: black;
+  }
+
+  .card {
+    border: none;
+    background-color: #c8e6c9;
+    border-radius: 10px;
+  }
+
+  .sidebar-logo {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .sidebar-logo img {
+    max-width: 80%;
+  }
+
+  .nav-link {
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+  }
+
+  .navbar-nav .nav-link {
+    border-bottom: none;
+  }

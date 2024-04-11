@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% csrf_token %}
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pontos no setor</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles_css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <a href="{% url 'account' %}">
+            <img src="{% static 'styles_css/sysmex-laes.png' %}" alt="Logo" class="logo">
+        </a>    
+        <nav>
+            <ul>
+                {% if user.is_rh == 0 %}
+                    <li><a href="{% url 'my_points' %}">Seus Pontos</a></li>
+                    {% if user.is_staff %}
+                        <li><a href="{% url 'gv_points' %}">Alocar Pontos</a></li>
+                        <li><a href="{% url 'points_board' %}">Seu Setor</a></li>
+                    {% endif %}
+                {% endif %}
+                {% if user.is_rh == 1 %}
+                    <li><a href="{% url 'requetss' %}">requisições</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+    
+    <h1>perfis no seu setor</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Email</th>
+                <th>POINTS</th>
+                <!-- Add more columns as needed -->
+            </tr>
+        </thead>
+        <tbody>
+            <!-- This is where the profiles will be dynamically inserted -->
+            {% for user in users %}
+                {% if user.cc == user_logged.cc and user.email != user_logged.email%}
+                    <tr>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.points }}</td>
+                        <!-- Render other profile data as needed -->
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

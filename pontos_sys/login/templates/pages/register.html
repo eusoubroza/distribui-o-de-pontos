@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles_css/styles.css' %}">
+    <title>Login Page</title>
+</head>
+<body>
+    <script>
+        window.onload = function() {
+            // Clear form fields on page load
+            var form = document.getElementById('registration-form');
+            form.reset();
+        };
+    </script>
+    
+    <div class="container">
+        <h1 id="login-heading">Register</h1>
+        <br>
+        <form method="post" action="" id="registration-form">
+            {% csrf_token %}
+            
+            {% if show_alert %}
+                <div class="alert">password or login invalid</div>
+            {% endif %}
+            
+            {% if show_alert_mail_exists %}
+                <div class="alert">email is incorrect</div>
+            {% endif %}
+            
+            <div class="input-container">
+                <label for="{{ form.email.id_for_label }}">Email:</label>
+                {{ form.email }}
+            </div>
+
+            <div class="input-container">
+                <label for="{{ form.password.id_for_label }}">Password:</label>
+                {{ form.password }}
+            </div>
+            
+            <input type="hidden" name="submit_button" value="">
+            <button class="button" onclick="document.getElementsByName('submit_button')[0].value='clicked';" type="submit">Register</button>
+        </form>
+        <h2>já tem uma conta?<a href="{% url 'index' %}">entrar</a></h>
+    </div>
+</body>
+</html>

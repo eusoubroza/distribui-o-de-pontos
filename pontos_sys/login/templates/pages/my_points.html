@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<head>
+    {% csrf_token %}
+    {% load static %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bootstrap Example</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.css" />
+
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="{% static 'styles_css/styleboot.css' %}">
+ 
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <ul class="navbar-nav ml-auto">
+      <a class="nav-link" href="#">Ajuda</a>
+      <li class="nav-item">
+        <a class="nav-link" href="#">{{ user }}</a>
+      </li>
+      <a class="nav-link" href="{% url 'index' %}">Logout</a>
+    </ul>
+  </nav>
+</header>
+
+<!-- Sidebar -->
+<!-- Sidebar -->
+<nav class="sidebar">
+  <div class="sidebar-logo">
+    <img src="{% static 'styles_css/sysmex-laes.png' %}" alt="Logo">
+  </div>
+  <div class="sidebar-sticky">
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link active" href="{% url 'account' %}">Página Inicial</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" data-toggle="collapse" data-target="#configOptions" aria-expanded="false" aria-controls="configOptions">Configuração -></a>
+        <div class="collapse" id="configOptions">
+          <ul class="list-group">
+            <li class="list-group-item"><a href="#">Parâmetros</a></li>
+            <li class="list-group-item"><a href="#">Usuários</a></li>
+          </ul>
+        </div>
+      </li>
+      {% if user.is_staff %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'gv_points' %}">Reconhecer</a>
+      </li>
+      {% endif %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'my_points' %}">Consultar Pontos</a>
+      </li>
+      {% if user.is_rh %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'requetss' %}">Requisições de resgate</a>
+      </li>
+      {% endif %}
+    </ul>
+  </div>
+</nav>
+    
+<br>
+<main role="main" class="main-content">
+
+<div class="parent-container">
+    <div class="container-fluid mt-5 my-points gray-section"> <!-- Same classes as main content container -->
+        <h5 class="small-heading">Últimos reconhecimentos recebidos</h5>
+        {% for transaction in transactions %}
+            {% if user == transaction.reciever %}
+                <div class="separator"></div>
+                <div class="widget-container2 "> <!-- Same class as main content widget container -->
+                    <div class="small-container2">
+                        <p class="large-value"><strong>Data: </strong>{{ transaction.timestamp }}</p>
+                        <p class="large-value"><strong>Remetente: </strong>{{ transaction.sender.email }}</p>
+                        <p class="large-value"><strong>Pontos: </strong>{{ transaction.amount }}</p>
+                        <p class="large-value"><strong>Mensagem: </strong>{{ transaction.description }}</p>
+                    </div>
+                </div>    
+            {% endif %}
+        {% endfor %} 
+    </div>   
+
+    
+</div>
+<br><br>    
+<div class="container-fluid mt-5 parent-container1">
+  <form method="POST">
+      {% csrf_token %}
+      <input type="hidden" name="submit_button" value="">
+      <button class="button" onclick="document.getElementsByName('submit_button')[0].value='clicked';" type="submit">resgatar pontos</button>
+  </form>
+</div>
+<br><br>
+
+</main>
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+{% if popup %}
+    <script>
+        Swal.fire({
+          title: "Good job!",
+          text: "You clicked the button!",
+          icon: "success"
+        });
+    </script>
+{% endif %}
+{% load sweetify %}
+{% sweetify %}
+</body>
+</html>

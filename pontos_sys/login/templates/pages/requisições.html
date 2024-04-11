@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<head>
+    {% csrf_token %}
+    {% load static %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bootstrap Example</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="{% static 'styles_css/styleboot.css' %}">
+ 
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <ul class="navbar-nav ml-auto">
+      <a class="nav-link" href="#">Ajuda</a>
+      <li class="nav-item">
+        <a class="nav-link" href="#">{{ user }}</a>
+      </li>
+      <a class="nav-link" href="{% url 'index' %}">Logout</a>
+    </ul>
+  </nav>
+</header>
+
+<!-- Sidebar -->
+<!-- Sidebar -->
+<nav class="sidebar">
+  <div class="sidebar-logo">
+    <img src="{% static 'styles_css/sysmex-laes.png' %}" alt="Logo">
+  </div>
+  <div class="sidebar-sticky">
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link active" href="{% url 'account' %}">Página Inicial</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" data-toggle="collapse" data-target="#configOptions" aria-expanded="false" aria-controls="configOptions">Configuração -></a>
+        <div class="collapse" id="configOptions">
+          <ul class="list-group">
+            <li class="list-group-item"><a href="#">Parâmetros</a></li>
+            <li class="list-group-item"><a href="#">Usuários</a></li>
+          </ul>
+        </div>
+      </li>
+      {% if user.is_staff %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'gv_points' %}">Reconhecer</a>
+      </li>
+      {% endif %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'my_points' %}">Consultar Pontos</a>
+      </li>
+      {% if user.is_rh %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'requetss' %}">Requisições de resgate</a>
+      </li>
+      {% endif %}
+    </ul>
+  </div>
+</nav>
+<br><br>
+  <main role="main" class="main-content">
+    <div style="width: 100%;">    
+      <h1 style="text-align: center; font-family: 'Arial', sans-serif;
+      font-size: 36px;
+      font-weight: bold;
+      color: #333;
+      letter-spacing: 2px;
+      line-height: 1.2;">Requisições em aberto</h1>
+    </div>
+    <table class="table custom-table">
+        <thead>
+            <tr>
+                <th>solicitante</th>
+                <th>status</th>
+                <th>ação</th>
+                <th>pontos</th>
+                <th>data de requisição</th>
+                <!-- Add more columns as needed -->
+            </tr>
+        </thead>
+        <tbody>
+            <!-- This is where the profiles will be dynamically inserted -->
+            {% for request in requests %}
+                
+                <tr>
+                    <td name="{{request.requester}}">{{ request.requester }}</td>
+                    {% if request.status == False %}
+                        <td> requisição de resgate de pontos fechada </td>
+                        <td>fechada</td>
+                        
+                    {% endif %}
+                    {% if request.status == True %}
+                        <td name="{{request.requester}}"> requisição de resgate de pontos em aberto </td>
+                        <td>
+                          <form action="" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="confirm-button" name="close_request" value="{{ request.id }}">fechar requisição</button>
+                          </form>
+                        </td>
+                        
+
+                    {% endif %}
+                    <td>{{ request.quantidade }}</td>
+                    <td>{{ request.timestamp }}</td>
+                    <!-- Render other profile data as needed -->
+                </tr>
+            
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="container-fluid mt-5 parent-container1">
+      <form method="POST">
+          {% csrf_token %}
+          <input type="hidden" name="submit_button" value="">
+          <button class="button" onclick="document.getElementsByName('submit_button')[0].value='clicked';" type="submit">gerar relatório</button>
+      </form>
+    </div>
+    <br><br>
+  </main>
+</body>
+</html>

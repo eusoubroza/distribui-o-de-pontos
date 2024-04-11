@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<head>
+    {% csrf_token %}
+    {% load static %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bootstrap Example</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="{% static 'styles_css/styleboot.css' %}">
+ 
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <ul class="navbar-nav ml-auto">
+      <a class="nav-link" href="#">Ajuda</a>
+      <li class="nav-item">
+        <a class="nav-link" href="#">{{ user }}</a>
+      </li>
+      <a class="nav-link" href="{% url 'index' %}">Logout</a>
+    </ul>
+  </nav>
+</header>
+
+<!-- Sidebar -->
+<!-- Sidebar -->
+<nav class="sidebar">
+  <div class="sidebar-logo">
+    <img src="{% static 'styles_css/sysmex-laes.png' %}" alt="Logo">
+  </div>
+  <div class="sidebar-sticky">
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link active" href="{% url 'account' %}">Página Inicial</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" data-toggle="collapse" data-target="#configOptions" aria-expanded="false" aria-controls="configOptions">Configuração -></a>
+        <div class="collapse" id="configOptions">
+          <ul class="list-group">
+            <li class="list-group-item"><a href="#">Parâmetros</a></li>
+            <li class="list-group-item"><a href="#">Usuários</a></li>
+          </ul>
+        </div>
+      </li>
+      {% if user.is_staff %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'gv_points' %}">Reconhecer</a>
+      </li>
+      {% endif %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'my_points' %}">Consultar Pontos</a>
+      </li>
+      {% if user.is_rh %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'requetss' %}">Requisições de resgate</a>
+      </li>
+      {% endif %}
+    </ul>
+  </div>
+</nav>
+<main role="main" class="main-content">
+
+  <div class="container-fluid mt-5">
+      <div class="cardd">
+          <h1 id="login-heading">Alocar pontos</h1>
+          <form method="post" action="" id="transaction-form">
+              {% csrf_token %}
+              <div class="input-container">
+                  <label for="{{ form.reciever.id_for_label }}">Email do destinatário:</label>
+                  <input type="text" name="input_field_name" class="form-control" placeholder="">
+              </div>
+              <div class="input-container">
+                  <label for="{{ form.amount.id_for_label }}">Qantidade:</label>
+                  <select name="amount" class="form-control">
+                    {% for value, label in form.amount.field.choices %}
+                        <option value="{{ value }}">{{ label }}</option>
+                    {% endfor %}
+                </select>
+              </div>
+              <div class="input-container">
+                  <label for="{{ form.description.id_for_label }}">Mensagem:</label>
+                  <input type="text" name="description" class="form-control" placeholder="">
+              </div>
+              <input type="hidden" name="submit_button" value="">
+              <button class="confirm-button" onclick="document.getElementsByName('submit_button')[0].value='clicked';" type="submit">Alocar pontos</button>
+          </form>
+      </div>
+  </div>
+    
+
+    <div class="parent-container">
+        <div class="container-fluid mt-5 my-points gray-section"> <!-- Same classes as main content container -->
+            <h5 class="small-heading">Últimos reconhecimentos realizados</h5>
+            {% for transaction in transactions %}
+                {% if transaction.sender_id == user.id %}
+                    <div class="separator"></div>
+                    <div class="widget-container2 "> <!-- Same class as main content widget container -->
+                        <div class="small-container2">
+                            <p class="large-value"><strong>data: </strong>{{ transaction.timestamp }}</p>
+                            <p class="large-value"><strong>destinatário: </strong>{{ transaction.reciever.email }}</p>
+                            <p class="large-value"><strong>pontos: </strong>{{ transaction.amount }}</p>
+                            <p class="large-value"><strong>mensagem: </strong>{{ transaction.description }}</p>
+                            <p class="large-value"><strong>data: </strong>{{ transaction.timestamp }}</p>
+                        </div>
+                    </div>    
+                {% endif %}
+            {% endfor %} 
+        </div>   
+        <br><br>
+        
+    </div>
+
+    <script>
+        window.onload = function() {
+            // Clear form fields on page load
+            var form = document.getElementById('registration-form');
+            form.reset();
+        };
+        
+        document.addEventListener("DOMContentLoaded", function() {
+            var form = document.getElementById("transaction-form");
+            
+            // Clear form fields
+            form.querySelector("[name='reciever']").value = "";
+            form.querySelector("[name='amount']").value = "";
+            form.querySelector("[name='description']").value = "";
+            
+            // Reset submit button value to not clicked
+            form.querySelector("[name='submit_button']").value = "";
+        });
+    </script>
+</main>
+{% load sweetify %}
+{% sweetify %}
+</body>
+</html>

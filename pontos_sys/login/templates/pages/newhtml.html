@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    {% load static %}
+    <meta http-equiv="X-UA-Compatible" content="IE=8,9,10,11" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>logar</title>
+    <link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-icon-57x57.png" />
+    <!-- ... Other <link> tags for favicons ... -->
+    <link type="text/css" href="{% static 'styles_css/reset.css' %}" rel="stylesheet" />
+    <link type="text/css" href="{% static 'styles_css\auth.css' %}" rel="stylesheet" />
+    <style>
+        #background {
+            background: url(/tas/image?key=lookandfeel.login.background_image.original) no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        .label {
+            color: #005CAC;
+        }
+
+        .non-default-button {
+            color: #005CAC;
+        }
+
+        .button {
+            background: #005CAC;
+        }
+
+        .button:hover {
+            opacity: 0.9;
+        }
+
+        .button:focus {
+            opacity: 0.9;
+        }
+    </style>
+
+</head>
+
+ <body class="realm-PUBLIC">
+    <div id="background">
+        <main>
+            <div id="content-container">
+                <div id="customer-logo-container">
+                    <a id="logo-link" target="_blank" rel="noopener noreferrer" title="Sysmex" href="https://www.sysmex.com.br">
+                        <img id="logo-image" alt="Sysmex" src="/tas/image?key=lookandfeel.ssd.login.logo" />
+                    </a>
+                </div>
+                <div id="content-border">
+                    <h1 class="pagetitle">Logar no sysmex points</h1>
+                    <div class="message-info">
+                        <span class="message-info subtitle">Ingresse com seu usuário sysmex</span>
+                    </div>
+                    <form id="login-form" method="post" action="">
+                        {% csrf_token %}
+                        <label for="loginname" class="loginlabel">Login</label>
+                        <input id="loginname" class="textbox logintextbox" name="login" type="text" maxlength="100" autofocus="autofocus" />
+                        <div id="password-div">
+                            <label for="password" class="loginlabel">Senha</label>
+                        </div>
+                        <input id="password" class="textbox logintextbox" name="password" type="password" autocomplete="off" maxlength="100" />
+                        <div class="remembercheckbox">
+                            <input id="remember" name="j_remember_password" type="checkbox" />
+                            <label id="checkboxlabel" for="remember">Lembrar senha</label>
+                        </div>
+                        <input class="button" name="" value="logar" onclick="document.getElementsByName('submit-button')[0].value='clicked';" type="submit">
+                        <input id="submit-button "name="submit-button" type="hidden" value="" />
+                    </form>
+                </div>
+                {% comment %} <div class="bottom-link-block">
+                    <div class="bottom-link">
+                        <a class="label" id="secure" href="/tas/secure">Entrar como operador</a>
+                    </div>
+                </div> {% endcomment %}
+            </div>
+        </main>
+    </div>
+</body> 
+</html>

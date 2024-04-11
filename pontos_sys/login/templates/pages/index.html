@@ -1,0 +1,34 @@
+
+<html>
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles_css/styles.css' %}">
+</head>
+<body>
+    <form method="post" action="">
+        {% csrf_token %}
+
+        {% if show_alert %}
+        <div class="alert">password and login must not be null</div>
+        {% endif %}
+
+        {% if show_alert_mail_exists %}
+        <div class="alert">email is incorrect</div>
+        {% endif %}
+
+        <label for="login">Login:</label>
+        <input type="text" id="login" name="login"><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password"><br>
+
+        <!-- Add a separate hidden field to identify the button click -->
+        <input type="hidden" name="submit_button" value="">
+
+        <!-- Set the value of the hidden field when the button is clicked -->
+        <button type="submit" onclick="document.getElementsByName('submit_button')[0].value='clicked';">Submit</button>
+    </form>
+</body>    
