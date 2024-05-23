@@ -15,7 +15,7 @@ from django.http import HttpResponse
 from django.http import JsonResponse
 import sweetify
 import time
-
+##teste
 def my_view(request):
     # Your view logic here
     sweetify.info(request, 'Message sent', button='Ok', timer=3000)
